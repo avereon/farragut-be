@@ -28,11 +28,9 @@ jobs:
           java-version: ${{env.JAVA_VERSION}}
 
       - name: Compile
-        working-directory: ./be
         run: |
           mvn ${{env.MAVEN_PARMS}} compile
 
       - name: Unit Tests
-        working-directory: ./be
         run: |
           mvn ${{env.MAVEN_PARMS}} test
