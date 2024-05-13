@@ -21,12 +21,6 @@ jobs:
       - name: Fetch sources
         uses: actions/checkout@v4
 
-      - name: Fetch sources
-        uses: actions/checkout@v4
-        with:
-          repository: avereon/farragut-api
-          path: ..
-
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v3
         with:
