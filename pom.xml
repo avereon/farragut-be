@@ -25,6 +25,15 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.boot</groupId>-->
+<!--            <artifactId>spring-boot-starter-data-jpa</artifactId>-->
+<!--        </dependency>-->
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-commons</artifactId>
+            <version>3.2.5</version>
+        </dependency>
 
         <dependency>
             <groupId>io.swagger.core.v3</groupId>
@@ -76,6 +85,11 @@
             <artifactId>jackson-databind-nullable</artifactId>
             <version>0.2.6</version>
         </dependency>
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-common</artifactId>
+            <version>2.5.0</version>
+        </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -107,8 +121,11 @@
                             <goal>generate</goal>
                         </goals>
                         <configuration>
-                            <inputSpec>https://raw.githubusercontent.com/avereon/farragut-api/main/src/main/api/farragut/v1.yml</inputSpec>
+                            <inputSpec>${project.basedir}/../farragut-api/src/main/api/farragut/v1.yml</inputSpec>
+<!--                            <inputSpec>https://raw.githubusercontent.com/avereon/farragut-api/main/src/main/api/farragut/v1.yml</inputSpec>-->
                             <generatorName>spring</generatorName>
+                            <apiPackage>com.avereon.farragut.adapter.api</apiPackage>
+                            <modelPackage>com.avereon.farragut.adapter.api.model</modelPackage>
                             <configOptions>
                                 <interfaceOnly>true</interfaceOnly>
                                 <skipDefaultInterface>true</skipDefaultInterface>
@@ -118,6 +135,22 @@
                                 <useSpringBoot3>true</useSpringBoot3>
                             </configOptions>
                         </configuration>
+                        <!--
+                        configOptions = [
+                            interfaceOnly                       : "true",
+                            skipDefaultInterface                : "true",
+                            useTags                             : "true",
+                            legacyDiscriminatorBehavior         : "false",
+                            generatedConstructorWithRequiredArgs: "false",
+                            useSpringBoot3                      : "true"
+                        ]
+                        typeMappings = [
+                            OffsetDateTime: "String"
+                        ]
+                        importMappings = [
+                            "java.time.OffsetDateTime": "java.lang.String"
+                        ]
+                        -->
                     </execution>
                 </executions>
             </plugin>
