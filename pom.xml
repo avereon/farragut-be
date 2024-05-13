@@ -22,6 +22,16 @@
             <artifactId>spring-boot-starter</artifactId>
         </dependency>
         <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>io.swagger.core.v3</groupId>
+            <artifactId>swagger-annotations</artifactId>
+            <version>2.2.21</version>
+        </dependency>
+        <dependency>
             <groupId>com.squareup.okhttp3</groupId>
             <artifactId>okhttp</artifactId>
             <version>4.12.0</version>
@@ -56,6 +66,16 @@
             <artifactId>gson-fire</artifactId>
             <version>1.9.0</version>
         </dependency>
+        <dependency>
+            <groupId>jakarta.validation</groupId>
+            <artifactId>jakarta.validation-api</artifactId>
+            <version>3.1.0-M2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openapitools</groupId>
+            <artifactId>jackson-databind-nullable</artifactId>
+            <version>0.2.6</version>
+        </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -88,9 +108,14 @@
                         </goals>
                         <configuration>
                             <inputSpec>${project.basedir}/../farragut-api/src/main/api/farragut/v1.yml</inputSpec>
-                            <generatorName>java</generatorName>
+                            <generatorName>spring</generatorName>
                             <configOptions>
-                                <sourceFolder>target/generated/java</sourceFolder>
+                                <interfaceOnly>true</interfaceOnly>
+                                <skipDefaultInterface>true</skipDefaultInterface>
+                                <useTags>true</useTags>
+                                <legacyDiscriminatorBehavior>false</legacyDiscriminatorBehavior>
+                                <generatedConstructorWithRequiredArgs>false</generatedConstructorWithRequiredArgs>
+                                <useSpringBoot3>true</useSpringBoot3>
                             </configOptions>
                         </configuration>
                     </execution>
