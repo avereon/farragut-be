@@ -135,22 +135,6 @@
                                 <useSpringBoot3>true</useSpringBoot3>
                             </configOptions>
                         </configuration>
-                        <!--
-                        configOptions = [
-                            interfaceOnly                       : "true",
-                            skipDefaultInterface                : "true",
-                            useTags                             : "true",
-                            legacyDiscriminatorBehavior         : "false",
-                            generatedConstructorWithRequiredArgs: "false",
-                            useSpringBoot3                      : "true"
-                        ]
-                        typeMappings = [
-                            OffsetDateTime: "String"
-                        ]
-                        importMappings = [
-                            "java.time.OffsetDateTime": "java.lang.String"
-                        ]
-                        -->
                     </execution>
                 </executions>
             </plugin>
