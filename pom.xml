@@ -121,8 +121,8 @@
                             <goal>generate</goal>
                         </goals>
                         <configuration>
-                            <inputSpec>${project.basedir}/../farragut-api/src/main/api/farragut/v1.yml</inputSpec>
-<!--                            <inputSpec>https://raw.githubusercontent.com/avereon/farragut-api/main/src/main/api/farragut/v1.yml</inputSpec>-->
+<!--                            <inputSpec>${project.basedir}/../farragut-api/src/main/api/farragut/v1.yml</inputSpec>-->
+                            <inputSpec>https://raw.githubusercontent.com/avereon/farragut-api/main/src/main/api/farragut/v1.yml</inputSpec>
                             <generatorName>spring</generatorName>
                             <apiPackage>com.avereon.farragut.adapter.api</apiPackage>
                             <modelPackage>com.avereon.farragut.adapter.api.model</modelPackage>
