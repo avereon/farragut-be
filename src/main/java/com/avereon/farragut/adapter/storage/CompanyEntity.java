@@ -17,4 +17,6 @@ public class CompanyEntity {
 
 	private String name;
 
+	private Integer year;
+
 }

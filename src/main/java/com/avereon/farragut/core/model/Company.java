@@ -9,13 +9,13 @@ public class Company {
 
 	private UUID id;
 
-	private String year;
-
 	private String name;
 
-	private Person commander;
+	private Integer year;
 
-	private Person assistant;
+	//private Person commander;
+
+	//private Person assistant;
 
 	// private Set<Person> members;
 
