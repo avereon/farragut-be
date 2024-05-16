@@ -1,3 +1,12 @@
 package com.avereon.farragut.core.model;
 
-public class Photo {}
+import lombok.Data;
+
+import java.util.UUID;
+
+@Data
+public class Photo {
+
+	private UUID id;
+
+}

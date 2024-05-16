@@ -1,10 +1,10 @@
-package com.avereon.farragut;
+package com.avereon.farragut.adapter.api;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class FarragutApplicationIT {
+public class CompanyControllerIT {
 
 	@Test
 	void contextLoads() {

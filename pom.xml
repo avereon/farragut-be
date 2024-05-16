@@ -202,6 +202,7 @@
 								</goals>
 								<configuration>
 									<inputSpec>${project.basedir}/../farragut-api/src/main/api/farragut/v1.yml</inputSpec>
+									<importMappings>Page=org.springframework.data.domain.Page</importMappings>
 								</configuration>
 							</execution>
 						</executions>
