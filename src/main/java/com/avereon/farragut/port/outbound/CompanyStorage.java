@@ -6,6 +6,8 @@ import org.springframework.data.domain.Pageable;
 
 public interface CompanyStorage {
 
+	Company save( Company company );
+
 	Page<Company> findAll( Pageable pageable );
 
 }

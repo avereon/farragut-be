@@ -5,6 +5,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.experimental.Accessors;
 
 import java.util.UUID;
 
@@ -12,6 +13,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @Table(name = "company")
+@Accessors( chain = true )
 public class CompanyEntity {
 
 	@Id

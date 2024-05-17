@@ -9,9 +9,9 @@ public interface CompanyEntityMapper {
 
 	CompanyEntity toEntity( Company company );
 
-	Company toModel( CompanyEntity entity );
+	Company toCore( CompanyEntity entity );
 
 	default Page<Company> mapPage( Page<CompanyEntity> page ) {
-		return page.map( this::toModel );
+		return page.map( this::toCore );
 	}
 }

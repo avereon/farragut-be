@@ -24,12 +24,12 @@ class CompanyEntityMapperTest {
 	}
 
 	@Test
-	public void testToModel() {
+	public void testToCore() {
 		 CompanyEntity entity = new CompanyEntity();
 		 entity.setId( UUID.randomUUID() );
 		 entity.setName( "Test Company" );
 
-		 Company company = mapper.toModel( entity );
+		 Company company = mapper.toCore( entity );
 
 		 assertThat( company.getId() ).isEqualTo( entity.getId() );
 		 assertThat( company.getName() ).isEqualTo( entity.getName() );

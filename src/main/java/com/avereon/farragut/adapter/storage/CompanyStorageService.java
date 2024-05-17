@@ -16,6 +16,11 @@ public class CompanyStorageService implements CompanyStorage {
 	private final CompanyEntityMapper mapper;
 
 	@Override
+	public Company save( Company company ) {
+		return mapper.toCore( repo.save( mapper.toEntity( company ) ) );
+	}
+
+	@Override
 	public Page<Company> findAll( Pageable pageable ) {
 		return mapper.mapPage( repo.findAll( pageable ) );
 	}
