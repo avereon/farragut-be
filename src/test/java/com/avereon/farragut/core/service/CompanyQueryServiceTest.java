@@ -1,8 +1,6 @@
 package com.avereon.farragut.core.service;
 
 import com.avereon.farragut.core.model.Company;
-import com.avereon.farragut.core.model.CompanyMapper;
-import com.avereon.farragut.core.model.CompanyMapperImpl;
 import com.avereon.farragut.port.outbound.CompanyStorage;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
