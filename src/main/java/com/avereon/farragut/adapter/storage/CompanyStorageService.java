@@ -11,9 +11,9 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class CompanyStorageService implements CompanyStorage {
 
-	private CompanyRepository repo;
+	private final CompanyRepository repo;
 
-	private CompanyEntityMapper mapper;
+	private final CompanyEntityMapper mapper;
 
 	@Override
 	public Page<Company> findAll( Pageable pageable ) {
