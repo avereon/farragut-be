@@ -11,7 +11,7 @@ public interface CompanyApiMapper {
 
 	Company toModel( com.avereon.farragut.adapter.api.model.Company api );
 
-	default Page<com.avereon.farragut.adapter.api.model.Company> toApiPage( Page<Company> page ) {
+	default Page toApiPage( Page<Company> page ) {
 		return page.map( this::toApi );
 	}
 
