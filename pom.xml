@@ -144,6 +144,7 @@
 							<generatorName>spring</generatorName>
 							<apiPackage>com.avereon.farragut.adapter.api</apiPackage>
 							<modelPackage>com.avereon.farragut.adapter.api.model</modelPackage>
+							<importMappings>Page=org.springframework.data.domain.Page</importMappings>
 							<configOptions>
 								<interfaceOnly>true</interfaceOnly>
 								<skipDefaultInterface>true</skipDefaultInterface>
@@ -200,7 +201,6 @@
 								</goals>
 								<configuration>
 									<inputSpec>${project.basedir}/../farragut-api/src/main/api/farragut/v1.yml</inputSpec>
-									<importMappings>Page=org.springframework.data.domain.Page</importMappings>
 								</configuration>
 							</execution>
 						</executions>
