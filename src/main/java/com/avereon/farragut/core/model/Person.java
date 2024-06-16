@@ -9,10 +9,14 @@ public class Person {
 
 	private UUID id;
 
-	private Company company;
+	private String familyName;
 
-	private String regiment;
+	private String givenName;
 
-	private String battalion;
+//	private Company company;
+//
+//	private String regiment;
+//
+//	private String battalion;
 
 }

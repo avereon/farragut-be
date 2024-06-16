@@ -1,7 +1,7 @@
 package com.avereon.farragut.adapter.storage;
 
-import com.avereon.farragut.core.model.Company;
-import com.avereon.farragut.port.outbound.CompanyStorage;
+import com.avereon.farragut.core.model.Camp;
+import com.avereon.farragut.port.outbound.CampStorage;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -11,24 +11,24 @@ import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
-public class CompanyStorageService implements CompanyStorage {
+public class CampStorageService implements CampStorage {
 
-	private final CompanyRepository repo;
+	private final CampRepository repo;
 
-	private final CompanyEntityMapper mapper;
+	private final CampEntityMapper mapper;
 
 	@Override
-	public Company save( Company company ) {
-		return mapper.toCore( repo.save( mapper.toEntity( company ) ) );
+	public Camp save( Camp camp ) {
+		return mapper.toCore( repo.save( mapper.toEntity( camp ) ) );
 	}
 
 	@Override
-	public Page<Company> findAll( Pageable pageable ) {
+	public Page<Camp> findAll( Pageable pageable ) {
 		return mapper.mapPage( repo.findAll( pageable ) );
 	}
 
 	@Override
-	public Company find( UUID id ) {
+	public Camp find( UUID id ) {
 		return mapper.toCore( repo.findById( id ).orElse( null ) );
 	}
 

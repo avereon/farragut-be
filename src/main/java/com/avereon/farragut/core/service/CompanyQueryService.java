@@ -8,6 +8,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 @Service
 @RequiredArgsConstructor
 public class CompanyQueryService implements CompanyQuery {
@@ -17,6 +19,10 @@ public class CompanyQueryService implements CompanyQuery {
 	public Page<Company> findAll( Pageable pageable ) {
 		System.err.println( "pageable: " + pageable );
 		return storage.findAll( pageable );
+	}
+
+	public Company find( UUID id ) {
+		return storage.find( id );
 	}
 
 }

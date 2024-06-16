@@ -4,15 +4,15 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class CompanyTest {
+class CampTest {
 
 	@Test
 	void constructor() {
 		// given
-		Company company = new Company();
+		Camp camp = new Camp();
 
 		// then
-		assertThat( company.getId() ).isNull();
+		assertThat( camp.getId() ).isNull();
 	}
 
 }
