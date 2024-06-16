@@ -42,3 +42,10 @@ jobs:
 
       - name: Analyze
         uses: github/codeql-action/analyze@v3
+
+      - name: Copy Server JAR
+        run: |
+          scp -B build/libs/farragut-*.jar ${{env.AVN_REPO_USERNAME}}@avereon.com:/opt/avn/store/latest/farragut.avereon.com/server.jar
+
+      - name: Update the Website
+        run: ssh ${{env.AVN_REPO_USERNAME}}@avereon.com /home/ecco/bin/update-farragut-server

@@ -1,0 +1,11 @@
+[Unit]
+Description=farragut
+After=syslog.target
+
+[Service]
+User=avn
+ExecStart=/opt/avn/web/farragut.avereon.com/server.jar --server.port=5060 --logging.file=/opt/avn/web/server.avereon.com/farragut.log
+SuccessExitStatus=143
+
+[Install]
+WantedBy=multi-user.target
