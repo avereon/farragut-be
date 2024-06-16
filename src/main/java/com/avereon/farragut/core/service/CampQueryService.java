@@ -23,7 +23,7 @@ public class CampQueryService implements CampQuery {
 
 	@Override
 	public Camp find( UUID UUID ) {
-		return null;
+		return storage.find( UUID );
 	}
 
 }

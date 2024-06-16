@@ -18,6 +18,8 @@ public class Company {
 
 	private Integer year;
 
+	private UUID campId;
+
 	//private Person commander;
 
 	//private Person assistant;
