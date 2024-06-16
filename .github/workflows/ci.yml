@@ -11,7 +11,6 @@ env:
   JAVA_VERSION: '21'
   MAVEN_PARMS: "-B -U -V --file pom.xml"
   AVN_REPO_USERNAME: ${{ secrets.AVN_REPO_USERNAME }}
-  AVN_REPO_PASSWORD: ${{ secrets.AVN_REPO_PASSWORD }}
 
 jobs:
   build:
@@ -22,6 +21,17 @@ jobs:
 
       - name: Fetch sources
         uses: actions/checkout@v4
+
+      - name: Fetch CI/CD resources
+        uses: actions/checkout@v4
+        with:
+          repository: avereon/canoe
+          path: .github
+
+      - name: Configuration
+        shell: bash
+        run: |
+          source .github/config.sh
 
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v3
@@ -46,8 +56,7 @@ jobs:
         uses: github/codeql-action/analyze@v3
 
       - name: Copy Server JAR
-        run: |
-          scp -B build/libs/farragut-*.jar ${{env.AVN_REPO_USERNAME}}@avereon.com:/opt/avn/store/latest/farragut.avereon.com/server.jar
+        run: scp -B build/libs/farragut-*.jar ${{env.AVN_REPO_USERNAME}}@avereon.com:/opt/avn/store/latest/farragut.avereon.com/server.jar
 
       - name: Update the Website
         run: ssh ${{env.AVN_REPO_USERNAME}}@avereon.com /home/ecco/bin/update-farragut-server
