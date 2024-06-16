@@ -15,7 +15,7 @@ env:
   GITHUB_REF: ${{ github.ref }}
   JAVA_DISTRO: 'adopt'
   JAVA_VERSION: '21'
-  MAVEN_PARMS: "-B -U -V --settings ../.github/settings.xml --file pom.xml"
+  MAVEN_PARMS: "-B -U -V --file pom.xml"
 
 jobs:
   build:
