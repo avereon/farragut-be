@@ -11,6 +11,7 @@ import java.util.UUID;
 @EqualsAndHashCode
 public class Camp {
 
+	@EqualsAndHashCode.Exclude
 	private UUID id;
 
 	private String name;

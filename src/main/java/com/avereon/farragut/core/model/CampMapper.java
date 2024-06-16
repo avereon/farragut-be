@@ -3,8 +3,8 @@ package com.avereon.farragut.core.model;
 import org.mapstruct.Mapper;
 
 @Mapper( componentModel = "spring" )
-public interface CompanyMapper {
+public interface CampMapper {
 
-	Company copy( Company company );
+	Camp copy( Camp company );
 
 }

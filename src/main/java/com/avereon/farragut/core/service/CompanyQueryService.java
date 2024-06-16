@@ -17,7 +17,6 @@ public class CompanyQueryService implements CompanyQuery {
 	private final CompanyStorage storage;
 
 	public Page<Company> findAll( Pageable pageable ) {
-		System.err.println( "pageable: " + pageable );
 		return storage.findAll( pageable );
 	}
 

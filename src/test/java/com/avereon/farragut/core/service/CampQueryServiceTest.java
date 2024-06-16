@@ -1,8 +1,7 @@
 package com.avereon.farragut.core.service;
 
-import com.avereon.farragut.core.model.Company;
-import com.avereon.farragut.port.inbound.CompanyQuery;
-import com.avereon.farragut.port.outbound.CompanyStorage;
+import com.avereon.farragut.core.model.Camp;
+import com.avereon.farragut.port.outbound.CampStorage;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -18,13 +17,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
 @ExtendWith( MockitoExtension.class )
-public class CompanyQueryServiceTest {
+public class CampQueryServiceTest {
 
 	@Mock
-	private CompanyStorage companyStorage;
+	private CampStorage campStorage;
 
 	@InjectMocks
-	private CompanyQueryService companyQueryService;
+	private CampQueryService campQueryService;
 
 	@Test
 	void testFindAll() {
@@ -32,15 +31,15 @@ public class CompanyQueryServiceTest {
 		Pageable pageable = Pageable.ofSize( 2 );
 
 		// when
-		Page<Company> companies = new PageImpl<>( List.of( new Company(), new Company() ), pageable, 5 );
-		when( companyStorage.findAll( pageable ) ).thenReturn( companies );
-		Page<Company> result = companyQueryService.findAll( pageable );
+		Page<Camp> companies = new PageImpl<>( List.of( new Camp(), new Camp() ), pageable, 7 );
+		when( campStorage.findAll( pageable ) ).thenReturn( companies );
+		Page<Camp> result = campQueryService.findAll( pageable );
 
 		// then
 		assertThat( result.getNumber() ).isEqualTo( 0 );
 		assertThat( result.getSize() ).isEqualTo( 2 );
-		assertThat( result.getTotalPages() ).isEqualTo( 3 );
-		assertThat( result.getTotalElements() ).isEqualTo( 5 );
+		assertThat( result.getTotalPages() ).isEqualTo( 4 );
+		assertThat( result.getTotalElements() ).isEqualTo( 7 );
 	}
 
 }
