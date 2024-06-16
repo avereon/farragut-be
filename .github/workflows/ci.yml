@@ -10,6 +10,8 @@ env:
   JAVA_DISTRO: 'adopt'
   JAVA_VERSION: '21'
   MAVEN_PARMS: "-B -U -V --file pom.xml"
+  AVN_REPO_USERNAME: ${{ secrets.AVN_REPO_USERNAME }}
+  AVN_REPO_PASSWORD: ${{ secrets.AVN_REPO_PASSWORD }}
 
 jobs:
   build:
