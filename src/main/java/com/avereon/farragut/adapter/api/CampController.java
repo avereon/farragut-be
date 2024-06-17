@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.UUID;
 
-import static com.avereon.farragut.adapter.api.Configuration.API_ROOT;
+import static com.avereon.farragut.adapter.api.ApiConfiguration.API_ROOT;
 
 @RestController
 @RequiredArgsConstructor

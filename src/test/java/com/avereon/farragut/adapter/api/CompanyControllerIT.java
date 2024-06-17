@@ -5,8 +5,6 @@ import com.avereon.farragut.adapter.storage.CompanyEntity;
 import com.avereon.farragut.adapter.storage.CompanyRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 
@@ -16,7 +14,6 @@ import java.util.UUID;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.http.HttpStatus.OK;
 
-@ExtendWith( MockitoExtension.class )
 public class CompanyControllerIT extends BaseIT {
 
 	@Autowired
