@@ -76,4 +76,4 @@ jobs:
         run: scp -B target/farragut-*.jar ${{env.AVN_REPO_USERNAME}}@avereon.com:/opt/avn/store/latest/farragut.avereon.com/server.jar
 
       - name: Update the Website
-        run: ssh ${{env.AVN_REPO_USERNAME}}@avereon.com /home/ecco/bin/update-farragut-server
+        run: ssh ${{env.AVN_REPO_USERNAME}}@avereon.com /home/ecco/bin/update-farragut-website
