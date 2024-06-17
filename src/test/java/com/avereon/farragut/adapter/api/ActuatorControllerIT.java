@@ -16,7 +16,7 @@ public class ActuatorControllerIT extends BaseIT {
 		// given
 
 		// when
-		var result = restTemplate.getForEntity( ApiConfiguration.ACTUATOR_PATH + "/health", Map.class );
+		var result = restTemplate.getForEntity( ApiConfiguration.ACTUATOR_ROOT + "/health", Map.class );
 		System.out.println( "result=" + result );
 
 		// then

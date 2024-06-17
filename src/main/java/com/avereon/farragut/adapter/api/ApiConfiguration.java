@@ -11,17 +11,17 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class ApiConfiguration {
 
-	public static final String API_ROOT = "";
+	public static final String API_ROOT = "/api";
 
 	// Reference: https://docs.spring.io/spring-boot/docs/3.0.x/actuator-api/htmlsingle/
-	public static final String ACTUATOR_PATH = API_ROOT + "/actuator";
+	public static final String ACTUATOR_ROOT = "/actuator";
 
 	@Bean
 	SecurityFilterChain securityFilterChain( HttpSecurity http ) throws Exception {
 //		http.authorizeHttpRequests( authorizeRequests -> authorizeRequests.anyRequest().permitAll() );
 		http.authorizeHttpRequests( authorizeRequests -> authorizeRequests.requestMatchers( HttpMethod.GET, CampController.CAMP_API_ROOT + "/**" ).permitAll() );
 		http.authorizeHttpRequests( authorizeRequests -> authorizeRequests.requestMatchers( HttpMethod.GET, CompanyController.COMPANY_API_ROOT + "/**" ).permitAll() );
-		http.authorizeHttpRequests( authorizeRequests -> authorizeRequests.requestMatchers( HttpMethod.GET, ApiConfiguration.ACTUATOR_PATH + "/**" ).permitAll() );
+		http.authorizeHttpRequests( authorizeRequests -> authorizeRequests.requestMatchers( HttpMethod.GET, ApiConfiguration.ACTUATOR_ROOT + "/**" ).permitAll() );
 		return http.build();
 	}
 
