@@ -8,6 +8,8 @@ server:
   port: 8060
 
 logging:
+  file:
+    name: farragut.log
   level:
     # Start with only WARN messages
     root: INFO
