@@ -1,6 +1,18 @@
 spring:
   application:
-    name: farragut
+    name: Farragut
+  main:
+    banner-mode: LOG
 
 server:
   port: 8060
+
+logging:
+  level:
+    # Start with only WARN messages
+    root: INFO
+    # Increase verbosity as needed
+    org:
+      avereon:
+        farragut: INFO
+
