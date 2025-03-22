@@ -19,6 +19,7 @@ public class ApiConfiguration {
 	@Bean
 	SecurityFilterChain securityFilterChain( HttpSecurity http ) throws Exception {
 //		http.authorizeHttpRequests( authorizeRequests -> authorizeRequests.anyRequest().permitAll() );
+		http.authorizeHttpRequests( authorizeRequests -> authorizeRequests.requestMatchers( HttpMethod.POST, AuthController.AUTH_API_ROOT + "/**" ).permitAll() );
 		http.authorizeHttpRequests( authorizeRequests -> authorizeRequests.requestMatchers( HttpMethod.GET, CampController.CAMP_API_ROOT + "/**" ).permitAll() );
 		http.authorizeHttpRequests( authorizeRequests -> authorizeRequests.requestMatchers( HttpMethod.GET, CompanyController.COMPANY_API_ROOT + "/**" ).permitAll() );
 		http.authorizeHttpRequests( authorizeRequests -> authorizeRequests.requestMatchers( HttpMethod.GET, ApiConfiguration.ACTUATOR_ROOT + "/**" ).permitAll() );

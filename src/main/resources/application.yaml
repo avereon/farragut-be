@@ -11,7 +11,7 @@ logging:
   file:
     name: farragut.log
   level:
-    # Start with only WARN messages
+    # Start with only INFO messages
     root: INFO
     # Increase verbosity as needed
     org:

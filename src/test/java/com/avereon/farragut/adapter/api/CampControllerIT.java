@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 
+import java.util.List;
 import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -83,7 +84,7 @@ public class CampControllerIT extends BaseIT {
 		assertThat( body ).containsEntry( "totalPages", 2 );
 		assertThat( body ).containsEntry( "totalCount", 4 );
 		assertThat( body ).containsKey( "values" );
-		assertThat( body.get( "values" ) ).asList().hasSize( 2 );
+		assertThat( (List<?>)body.get( "values" ) ).hasSize( 2 );
 	}
 
 }
