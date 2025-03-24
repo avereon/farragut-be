@@ -16,13 +16,14 @@ public class AuthController implements AuthApi {
 
 	public static final String AUTH_API_ROOT = API_ROOT + "/auth";
 
-	@PermitAll
 	@Override
 	public ResponseEntity<String> login( String body ) {
 		MultiValueMap<String,String> parameters = getParameters( body );
 
 		String username = parameters.getFirst( "username" );
 		String password = parameters.getFirst( "password" );
+
+		if( password == null || password.isBlank() ) return ResponseEntity.badRequest().build();
 
 		// TODO Authenticate the user
 
