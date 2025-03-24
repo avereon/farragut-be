@@ -6,6 +6,7 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.http.HttpStatus;
 
+import java.util.Map;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -27,9 +28,13 @@ public class AuthControllerIT extends BaseIT {
 		// then
 		assertThat( result.getStatusCode() ).isEqualTo( expected );
 
-		//		Map<String,Object> body = (Map<String,Object>)result.getBody();
-		//		assertThat( body ).isNotNull();
-		//		assertThat( body ).containsEntry( "status", "UP" );
+		if( expected == OK ) {
+			String resultBody = result.getBody();
+			assertThat( resultBody ).isNotNull();
+			assertThat( resultBody ).matches( ".*\\..*\\..*" );
+		} else {
+			assertThat( result.getBody() ).isNull();
+		}
 	}
 
 	public static Stream<Arguments> login() {
