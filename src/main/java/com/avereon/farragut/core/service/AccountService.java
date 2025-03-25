@@ -37,11 +37,11 @@ public class AccountService implements AccountCommand, AccountQuery {
 		return null;
 	}
 
-	public String generateJwt( UUID accountId ) {
-		return generateJwt( accountStorage.find( accountId ) );
+	public String createJwt( UUID accountId ) {
+		return createJwt( accountStorage.find( accountId ) );
 	}
 
-	public String generateJwt( Account account ) {
+	public String createJwt( Account account ) {
 		// Lookup the account permissions
 		List<String> permissions = List.of( Role.CLIENT );
 

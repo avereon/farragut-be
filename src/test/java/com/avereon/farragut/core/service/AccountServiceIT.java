@@ -23,14 +23,14 @@ public class AccountServiceIT extends BaseIT {
 	private JwtTokenProvider tokenProvider;
 
 	@Test
-	void generateJwt() {
+	void createJwt() {
 		// given
 		Account account = new Account();
 		account.setId( IdUtil.random() );
 		account.setName( "John Doe" );
 
 		// when
-		String jwt = service.generateJwt( account );
+		String jwt = service.createJwt( account );
 
 		// then
 		assertTrue( tokenProvider.validateToken( jwt ) );
