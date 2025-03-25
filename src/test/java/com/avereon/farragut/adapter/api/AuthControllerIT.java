@@ -1,13 +1,13 @@
 package com.avereon.farragut.adapter.api;
 
 import com.avereon.farragut.BaseIT;
+import com.avereon.farragut.adapter.storage.AccountEntity;
 import com.avereon.farragut.adapter.storage.CredentialEntity;
 import com.avereon.farragut.adapter.storage.CredentialRepository;
-import com.avereon.farragut.adapter.storage.UserEntity;
-import com.avereon.farragut.adapter.storage.UserRepository;
+import com.avereon.farragut.adapter.storage.AccountRepository;
 import com.avereon.farragut.core.config.PasswordEncoder;
 import com.avereon.farragut.core.service.AuthCommandService;
-import com.avereon.farragut.core.service.UserService;
+import com.avereon.farragut.core.service.AccountService;
 import com.avereon.farragut.util.IdUtil;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -30,10 +30,10 @@ public class AuthControllerIT extends BaseIT {
 	private AuthCommandService authService;
 
 	@Autowired
-	private UserService userService;
+	private AccountService accountService;
 
 	@Autowired
-	private UserRepository userRepo;
+	private AccountRepository userRepo;
 
 	@Autowired
 	private PasswordEncoder passwordEncoder;
@@ -46,15 +46,15 @@ public class AuthControllerIT extends BaseIT {
 	void login( String username, String password, HttpStatus expected ) {
 		// given
 		// Create a user
-		UserEntity userEntity = new UserEntity();
-		userEntity.setId( IdUtil.random() );
-		userRepo.save( userEntity );
+		AccountEntity accountEntity = new AccountEntity();
+		accountEntity.setId( IdUtil.random() );
+		userRepo.save( accountEntity );
 
 		// Create a credential
 		CredentialEntity credentialEntity = new CredentialEntity();
 		credentialEntity.setId( IdUtil.generate( USERNAME ) );
 		credentialEntity.setSecret( passwordEncoder.encode( PASSWORD ) );
-		credentialEntity.setUserId( userEntity.getId() );
+		credentialEntity.setUserId( accountEntity.getId() );
 		credentialRepo.save( credentialEntity );
 
 		String body = "";

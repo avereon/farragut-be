@@ -12,9 +12,9 @@ import java.util.UUID;
 @Entity
 @Getter
 @Setter
-@Table( name = "appuser" )
+@Table( name = "account" )
 @Accessors( chain = true )
-public class UserEntity {
+public class AccountEntity {
 
 	/**
 	 * The user id.
@@ -23,13 +23,8 @@ public class UserEntity {
 	private UUID id;
 
 	/**
-	 * The user given name.
+	 * The account name.
 	 */
-	private String givenName;
-
-	/**
-	 * The user family name.
-	 */
-	private String familyName;
+	private String name;
 
 }

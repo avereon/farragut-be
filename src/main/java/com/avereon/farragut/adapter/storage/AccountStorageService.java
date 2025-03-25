@@ -1,7 +1,7 @@
 package com.avereon.farragut.adapter.storage;
 
-import com.avereon.farragut.core.model.User;
-import com.avereon.farragut.port.outbound.UserStorage;
+import com.avereon.farragut.core.model.Account;
+import com.avereon.farragut.port.outbound.AccountStorage;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -11,24 +11,24 @@ import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
-public class UserStorageService implements UserStorage {
+public class AccountStorageService implements AccountStorage {
 
-	private final UserRepository repo;
+	private final AccountRepository repo;
 
-	private final UserEntityMapper mapper;
+	private final AccountEntityMapper mapper;
 
 	@Override
-	public User save( User user ) {
-		return mapper.map( repo.save( mapper.map( user ) ) );
+	public Account save( Account account ) {
+		return mapper.map( repo.save( mapper.map( account ) ) );
 	}
 
 	@Override
-	public Page<User> findAll( Pageable pageable ) {
+	public Page<Account> findAll( Pageable pageable ) {
 		return mapper.mapPage( repo.findAll( pageable ) );
 	}
 
 	@Override
-	public User find( UUID id ) {
+	public Account find( UUID id ) {
 		return mapper.map( repo.findById( id ).orElse( null ) );
 	}
 

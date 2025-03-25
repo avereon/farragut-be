@@ -18,7 +18,7 @@ public class AuthCommandService implements AuthCommand {
 
 	private final CredentialStorage credentialStorage;
 
-	private final UserService userService;
+	private final AccountService accountService;
 
 	@Override
 	public String authenticate( Map<String, String> credentials ) {
@@ -35,7 +35,7 @@ public class AuthCommandService implements AuthCommand {
 		if( !passwordEncoder.matches( password, credential.getSecret() ) ) throw new IllegalArgumentException();
 
 		// Generate a new JWT for the user
-		return userService.generateJwt( credential.getUserId() );
+		return accountService.generateJwt( credential.getUserId() );
 	}
 
 }
