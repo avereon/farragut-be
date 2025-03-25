@@ -1,12 +1,20 @@
 package com.avereon.farragut.adapter.api;
 
 import com.avereon.farragut.BaseIT;
+import com.avereon.farragut.adapter.storage.CredentialEntity;
+import com.avereon.farragut.adapter.storage.CredentialRepository;
+import com.avereon.farragut.adapter.storage.UserEntity;
+import com.avereon.farragut.adapter.storage.UserRepository;
+import com.avereon.farragut.core.service.AuthCommandService;
+import com.avereon.farragut.core.service.UserService;
+import com.avereon.farragut.port.inbound.AuthCommand;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 
-import java.util.Map;
+import java.util.UUID;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -14,10 +22,34 @@ import static org.springframework.http.HttpStatus.OK;
 
 public class AuthControllerIT extends BaseIT {
 
+	@Autowired
+	private AuthCommandService authService;
+
+	@Autowired
+	private UserService userService;
+
+	@Autowired
+	private UserRepository userRepo;
+
+	@Autowired
+	private CredentialRepository credentialRepo;
+
 	@ParameterizedTest
 	@MethodSource
 	void login( String username, String password, HttpStatus expected ) {
 		// given
+		// Create a user
+		UserEntity userEntity = new UserEntity();
+		userEntity.setId( UUID.randomUUID() );
+		userRepo.save( userEntity );
+
+		// Create a credential
+		CredentialEntity credentialEntity = new CredentialEntity();
+		credentialEntity.setId( AuthCommand.generateClientId( username ) );
+		credentialEntity.setSecret( password );
+		credentialEntity.setUserId( userEntity.getId() );
+		credentialRepo.save( credentialEntity );
+
 		String body = "username=" + username;
 		if( password != null ) body = body + "&password=" + password;
 

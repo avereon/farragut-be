@@ -45,4 +45,5 @@ public class AuthController implements AuthApi {
 		UriComponentsBuilder builder= UriComponentsBuilder.fromUriString("?" + body);
 		return builder.build().getQueryParams();
 	}
+
 }

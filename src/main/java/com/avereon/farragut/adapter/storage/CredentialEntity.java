@@ -29,4 +29,10 @@ public class CredentialEntity {
 	 */
 	private String secret;
 
+	/**
+	 * The user id. This is the user associated with these credentials. A user may
+	 * have multiple sets of credentials.
+	 */
+	private UUID userId;
+
 }

@@ -1,8 +1,10 @@
 package com.avereon.farragut.core.service;
 
 import com.avereon.farragut.core.config.PasswordEncoder;
+import com.avereon.farragut.core.model.Credential;
 import com.avereon.farragut.port.inbound.AuthCommand;
 import com.avereon.farragut.port.outbound.CredentialStorage;
+import com.avereon.farragut.port.outbound.UserStorage;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +16,9 @@ public class AuthCommandService implements AuthCommand {
 
 	private final PasswordEncoder passwordEncoder;
 
-	private final CredentialStorage storage;
+	private final CredentialStorage credentialStorage;
+
+	private final UserService userService;
 
 	@Override
 	public String authenticate( Map<String, String> credentials ) {
@@ -24,6 +28,7 @@ public class AuthCommandService implements AuthCommand {
 		if( password == null || password.isBlank() ) return null;
 
 		// Get the password hash from the database
+		Credential credential = credentialStorage.find( AuthCommand.generateClientId( username ) );
 		String expectedHash = passwordEncoder.encode( password );
 
 		// Verify the password
@@ -35,9 +40,7 @@ public class AuthCommandService implements AuthCommand {
 		}
 
 		// Generate a new JWT for the user
-		String jwt = "aaaaa.bbbbb.ccccc";
-
-		return jwt;
+		return userService.generateJwt( credential.getUserId() );
 	}
 
 }
