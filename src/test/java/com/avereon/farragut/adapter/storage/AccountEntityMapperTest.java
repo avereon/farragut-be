@@ -9,15 +9,14 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class AccountEntityMapperTest {
 
-	private final AccountEntityMapper mapper = new UserEntityMapperImpl();
+	private final AccountEntityMapper mapper = new AccountEntityMapperImpl();
 
 	@Test
 	void testToEntity() {
 		// given
 		Account account = new Account();
 		account.setId( IdUtil.random() );
-		account.setGivenName( "John" );
-		account.setFamilyName( "Doe" );
+		account.setName( "John Doe" );
 
 		// when
 		AccountEntity accountEntity = mapper.map( account );
@@ -25,8 +24,7 @@ class AccountEntityMapperTest {
 		// then
 		assertNotNull( accountEntity );
 		assertEquals( account.getId(), accountEntity.getId() );
-		assertEquals( account.getGivenName(), accountEntity.getGivenName() );
-		assertEquals( account.getFamilyName(), accountEntity.getFamilyName() );
+		assertEquals( account.getName(), accountEntity.getName() );
 	}
 
 	@Test
@@ -34,8 +32,7 @@ class AccountEntityMapperTest {
 		// given
 		AccountEntity accountEntity = new AccountEntity();
 		accountEntity.setId( IdUtil.random() );
-		accountEntity.setGivenName( "John" );
-		accountEntity.setFamilyName( "Doe" );
+		accountEntity.setName( "John Doe" );
 
 		// when
 		Account account = mapper.map( accountEntity );
@@ -43,8 +40,7 @@ class AccountEntityMapperTest {
 		// then
 		assertNotNull( account );
 		assertEquals( accountEntity.getId(), account.getId() );
-		assertEquals( accountEntity.getGivenName(), account.getGivenName() );
-		assertEquals( accountEntity.getFamilyName(), account.getFamilyName() );
+		assertEquals( accountEntity.getName(), account.getName() );
 	}
 
 }
