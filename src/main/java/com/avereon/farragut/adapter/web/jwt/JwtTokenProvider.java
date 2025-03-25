@@ -1,6 +1,5 @@
 package com.avereon.farragut.adapter.web.jwt;
 
-import com.avereon.farragut.core.model.Account;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
@@ -18,7 +17,6 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 @Component
 @Slf4j
@@ -54,8 +52,8 @@ public class JwtTokenProvider {
 		}
 	}
 
-	public String createToken( Account account, Authentication authentication, boolean remember ) {
-		return createToken( account, authentication, remember, System.currentTimeMillis() );
+	public String createToken( String uid, String subject, String authorities, boolean remember ) {
+		return createToken( uid, subject, authorities, remember, System.currentTimeMillis() );
 	}
 
 	public Map<String, Object> parse( String token ) {
@@ -103,15 +101,17 @@ public class JwtTokenProvider {
 		return jwtRememberedTokenValidityInSeconds;
 	}
 
-	String createToken( Account user, Authentication authentication, boolean remember, long timestamp ) {
-		String userId = user.getId().toString();
-		String subject = authentication.getName();
-		String authorities = authentication.getAuthorities().stream().map( GrantedAuthority::getAuthority ).collect( Collectors.joining( "," ) );
-
+	String createToken( String uid, String subject, String authorities, boolean remember, long timestamp ) {
 		Date validity = new Date( timestamp + tokenValidityInMilliseconds );
 		if( remember ) validity = new Date( timestamp + tokenValidityInMillisecondsForRememberMe );
 
-		return Jwts.builder().claim( JwtToken.USER_ID_CLAIM_KEY, userId ).subject( subject ).claim( JwtToken.AUTHORITIES_CLAIM_KEY, authorities ).expiration( validity ).signWith( key ).compact();
+		return Jwts.builder()
+			.subject( subject )
+			.claim( JwtToken.USER_ID_CLAIM_KEY, uid )
+			.claim( JwtToken.AUTHORITIES_CLAIM_KEY, authorities )
+			.expiration( validity )
+			.signWith( key )
+			.compact();
 	}
 
 }

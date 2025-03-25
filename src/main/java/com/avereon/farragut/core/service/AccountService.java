@@ -1,5 +1,6 @@
 package com.avereon.farragut.core.service;
 
+import com.avereon.farragut.adapter.web.jwt.JwtTokenProvider;
 import com.avereon.farragut.core.model.Account;
 import com.avereon.farragut.core.model.Role;
 import com.avereon.farragut.port.inbound.AccountCommand;
@@ -19,6 +20,8 @@ public class AccountService implements AccountCommand, AccountQuery {
 
 	private final AccountStorage accountStorage;
 
+	private final JwtTokenProvider jwtTokenProvider;
+
 	@Override
 	public Account create( Account account ) {
 		return null;
@@ -35,16 +38,20 @@ public class AccountService implements AccountCommand, AccountQuery {
 	}
 
 	public String generateJwt( UUID accountId ) {
-		// Lookup the account
-		Account account = accountStorage.find( accountId );
+		return generateJwt( accountStorage.find( accountId ) );
+	}
 
+	public String generateJwt( Account account ) {
 		// Lookup the account permissions
 		List<String> permissions = List.of( Role.CLIENT );
 
-		// TODO Generate a new JWT for the account
+		// Map the account data to JWT data
+		String uid = account.getId().toString();
+		String subject = account.getName();
+		String authorities = String.join( ",", permissions );
 
 		// Return the new JWT
-		return "aaaaa.bbbbb.ccccc";
+		return jwtTokenProvider.createToken( uid, subject, authorities, false );
 	}
 
 }

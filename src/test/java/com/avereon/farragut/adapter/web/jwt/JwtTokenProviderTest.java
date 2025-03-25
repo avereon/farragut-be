@@ -23,18 +23,18 @@ class JwtTokenProviderTest extends BaseIT {
 		// given
 		Account account = new Account();
 		account.setId( IdUtil.random() );
-		Authentication authentication = new TestingAuthenticationToken( "username", "password", "TESTER" );
+		account.setName( "John Doe" );
 		boolean remember = false;
 		long timestamp = System.currentTimeMillis();
 		long expiration = timestamp / 1000 + tokenProvider.getJwtValidityInSeconds();
 
 		// when
-		String token = tokenProvider.createToken( account, authentication, remember, timestamp );
+		String token = tokenProvider.createToken( account.getId().toString(), account.getName(), "TESTER", remember, timestamp );
 
 		// then
 		Map<String, Object> claims = tokenProvider.parse( token );
 		assertThat( claims ).containsEntry( JwtToken.USER_ID_CLAIM_KEY, account.getId().toString() );
-		assertThat( claims ).containsEntry( JwtToken.SUBJECT_CLAIM_KEY, "username" );
+		assertThat( claims ).containsEntry( JwtToken.SUBJECT_CLAIM_KEY, "John Doe" );
 		assertThat( claims ).containsEntry( JwtToken.AUTHORITIES_CLAIM_KEY, "TESTER" );
 		assertThat( claims ).containsEntry( JwtToken.EXPIRES_CLAIM_KEY, expiration );
 	}
@@ -44,18 +44,18 @@ class JwtTokenProviderTest extends BaseIT {
 		// given
 		Account account = new Account();
 		account.setId( IdUtil.random() );
-		Authentication authentication = new TestingAuthenticationToken( "username", "password", "TESTER" );
+		account.setName( "John Doe" );
 		boolean remember = true;
 		long timestamp = System.currentTimeMillis();
 		long expiration = timestamp / 1000 + tokenProvider.getRememberedJwtValidityInSeconds();
 
 		// when
-		String token = tokenProvider.createToken( account, authentication, remember, timestamp );
+		String token = tokenProvider.createToken( account.getId().toString(), account.getName(), "TESTER", remember, timestamp );
 
 		// then
 		Map<String, Object> claims = tokenProvider.parse( token );
 		assertThat( claims ).containsEntry( JwtToken.USER_ID_CLAIM_KEY, account.getId().toString() );
-		assertThat( claims ).containsEntry( JwtToken.SUBJECT_CLAIM_KEY, "username" );
+		assertThat( claims ).containsEntry( JwtToken.SUBJECT_CLAIM_KEY, "John Doe" );
 		assertThat( claims ).containsEntry( JwtToken.AUTHORITIES_CLAIM_KEY, "TESTER" );
 		assertThat( claims ).containsEntry( JwtToken.EXPIRES_CLAIM_KEY, expiration );
 	}
