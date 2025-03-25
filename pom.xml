@@ -16,8 +16,13 @@
 
 	<properties>
 		<java.version>17</java.version>
+
+		<bouncy.castle.version>1.80</bouncy.castle.version>
+		<jjwt.version>0.12.6</jjwt.version>
 		<lombok.version>1.18.36</lombok.version>
+		<mariadb.client.version>3.5.2</mariadb.client.version>
 		<org.mapstruct.version>1.6.3</org.mapstruct.version>
+		<spring.security.crypto.version>6.4.4</spring.security.crypto.version>
 	</properties>
 
 	<dependencies>
@@ -60,17 +65,32 @@
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-crypto</artifactId>
-			<version>6.4.4</version>
+			<version>${spring.security.crypto.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.bouncycastle</groupId>
 			<artifactId>bcpkix-jdk18on</artifactId>
-			<version>1.80</version>
+			<version>${bouncy.castle.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.mariadb.jdbc</groupId>
 			<artifactId>mariadb-java-client</artifactId>
-			<version>3.5.2</version>
+			<version>${mariadb.client.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt-api</artifactId>
+			<version>${jjwt.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt-impl</artifactId>
+			<version>${jjwt.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt-jackson</artifactId>
+			<version>${jjwt.version}</version>
 		</dependency>
 
 		<dependency>

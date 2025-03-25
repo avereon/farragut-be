@@ -1,6 +1,7 @@
 package com.avereon.farragut.core.service;
 
 import com.avereon.farragut.core.model.Account;
+import com.avereon.farragut.core.model.Role;
 import com.avereon.farragut.port.inbound.AccountCommand;
 import com.avereon.farragut.port.inbound.AccountQuery;
 import com.avereon.farragut.port.outbound.AccountStorage;
@@ -37,9 +38,8 @@ public class AccountService implements AccountCommand, AccountQuery {
 		// Lookup the account
 		Account account = accountStorage.find( accountId );
 
-		// TODO Lookup the account permissions
-		// FIXME Move permission constants to a common location
-		List<String> permissions = List.of( "NORMAL" );
+		// Lookup the account permissions
+		List<String> permissions = List.of( Role.CLIENT );
 
 		// TODO Generate a new JWT for the account
 
