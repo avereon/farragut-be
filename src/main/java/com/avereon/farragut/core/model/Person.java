@@ -13,10 +13,10 @@ public class Person {
 
 	private String givenName;
 
-//	private Company company;
-//
-//	private String regiment;
-//
-//	private String battalion;
+	//	private Company company;
+	//
+	//	private String regiment;
+	//
+	//	private String battalion;
 
 }

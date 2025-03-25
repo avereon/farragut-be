@@ -5,22 +5,26 @@ import com.avereon.farragut.adapter.storage.CredentialEntity;
 import com.avereon.farragut.adapter.storage.CredentialRepository;
 import com.avereon.farragut.adapter.storage.UserEntity;
 import com.avereon.farragut.adapter.storage.UserRepository;
+import com.avereon.farragut.core.config.PasswordEncoder;
 import com.avereon.farragut.core.service.AuthCommandService;
 import com.avereon.farragut.core.service.UserService;
-import com.avereon.farragut.port.inbound.AuthCommand;
+import com.avereon.farragut.util.IdUtil;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 
-import java.util.UUID;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.http.HttpStatus.OK;
 
 public class AuthControllerIT extends BaseIT {
+
+	private static final String USERNAME = "username";
+
+	private static final String PASSWORD = "password";
 
 	@Autowired
 	private AuthCommandService authService;
@@ -32,6 +36,9 @@ public class AuthControllerIT extends BaseIT {
 	private UserRepository userRepo;
 
 	@Autowired
+	private PasswordEncoder passwordEncoder;
+
+	@Autowired
 	private CredentialRepository credentialRepo;
 
 	@ParameterizedTest
@@ -40,18 +47,19 @@ public class AuthControllerIT extends BaseIT {
 		// given
 		// Create a user
 		UserEntity userEntity = new UserEntity();
-		userEntity.setId( UUID.randomUUID() );
+		userEntity.setId( IdUtil.random() );
 		userRepo.save( userEntity );
 
 		// Create a credential
 		CredentialEntity credentialEntity = new CredentialEntity();
-		credentialEntity.setId( AuthCommand.generateClientId( username ) );
-		credentialEntity.setSecret( password );
+		credentialEntity.setId( IdUtil.generate( USERNAME ) );
+		credentialEntity.setSecret( passwordEncoder.encode( PASSWORD ) );
 		credentialEntity.setUserId( userEntity.getId() );
 		credentialRepo.save( credentialEntity );
 
-		String body = "username=" + username;
-		if( password != null ) body = body + "&password=" + password;
+		String body = "";
+		if( username != null ) body += "username=" + username;
+		if( password != null ) body += "&password=" + password;
 
 		// when
 		var result = restTemplate.postForEntity( AuthController.AUTH_API_ROOT + "/login", body, String.class );
@@ -61,16 +69,22 @@ public class AuthControllerIT extends BaseIT {
 		assertThat( result.getStatusCode() ).isEqualTo( expected );
 
 		if( expected == OK ) {
-			String resultBody = result.getBody();
-			assertThat( resultBody ).isNotNull();
-			assertThat( resultBody ).matches( ".*\\..*\\..*" );
+			assertThat( result.getBody() ).isNotNull().matches( ".*\\..*\\..*" );
 		} else {
 			assertThat( result.getBody() ).isNull();
 		}
 	}
 
 	public static Stream<Arguments> login() {
-		return Stream.of( Arguments.of( "u", "p", OK ), Arguments.of( "u", "", HttpStatus.BAD_REQUEST ), Arguments.of( "u", null, HttpStatus.BAD_REQUEST ) );
+		return Stream.of(
+			Arguments.of( USERNAME, PASSWORD, OK ),
+			Arguments.of( null, PASSWORD, HttpStatus.UNAUTHORIZED ),
+			Arguments.of( "", PASSWORD, HttpStatus.UNAUTHORIZED ),
+			Arguments.of( "baduser", PASSWORD, HttpStatus.UNAUTHORIZED ),
+			Arguments.of( USERNAME, "", HttpStatus.UNAUTHORIZED ),
+			Arguments.of( USERNAME, null, HttpStatus.UNAUTHORIZED ),
+			Arguments.of( USERNAME, "badpass", HttpStatus.UNAUTHORIZED )
+		);
 	}
 
 	@ParameterizedTest

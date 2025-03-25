@@ -4,7 +4,7 @@ import com.avereon.farragut.core.model.Camp;
 import org.mapstruct.Mapper;
 import org.springframework.data.domain.Page;
 
-@Mapper(componentModel = "spring")
+@Mapper( componentModel = "spring" )
 public interface CampEntityMapper {
 
 	CampEntity toEntity( Camp camp );

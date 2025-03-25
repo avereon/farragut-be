@@ -1,9 +1,8 @@
 package com.avereon.farragut.adapter.storage;
 
 import com.avereon.farragut.core.model.Company;
+import com.avereon.farragut.util.IdUtil;
 import org.junit.jupiter.api.Test;
-
-import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -14,7 +13,7 @@ class CompanyEntityMapperTest {
 	@Test
 	public void testToEntity() {
 		Company company = new Company();
-		company.setId( UUID.randomUUID() );
+		company.setId( IdUtil.random() );
 		company.setName( "Test Company" );
 		company.setYear( 1941 );
 
@@ -27,16 +26,16 @@ class CompanyEntityMapperTest {
 
 	@Test
 	public void testToCore() {
-		 CompanyEntity entity = new CompanyEntity();
-		 entity.setId( UUID.randomUUID() );
-		 entity.setName( "Test Company" );
-		 entity.setEstablishedYear( 1941 );
+		CompanyEntity entity = new CompanyEntity();
+		entity.setId( IdUtil.random() );
+		entity.setName( "Test Company" );
+		entity.setEstablishedYear( 1941 );
 
-		 Company company = mapper.toCore( entity );
+		Company company = mapper.toCore( entity );
 
-		 assertThat( company.getId() ).isEqualTo( entity.getId() );
-		 assertThat( company.getName() ).isEqualTo( entity.getName() );
-		 assertThat( company.getYear() ).isEqualTo( entity.getEstablishedYear() );
+		assertThat( company.getId() ).isEqualTo( entity.getId() );
+		assertThat( company.getName() ).isEqualTo( entity.getName() );
+		assertThat( company.getYear() ).isEqualTo( entity.getEstablishedYear() );
 	}
 
 }

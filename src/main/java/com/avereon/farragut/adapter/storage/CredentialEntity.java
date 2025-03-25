@@ -12,7 +12,7 @@ import java.util.UUID;
 @Entity
 @Getter
 @Setter
-@Table(name = "credential")
+@Table( name = "credential" )
 @Accessors( chain = true )
 public class CredentialEntity {
 

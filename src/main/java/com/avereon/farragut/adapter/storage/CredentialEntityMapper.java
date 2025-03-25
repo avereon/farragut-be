@@ -4,7 +4,7 @@ import com.avereon.farragut.core.model.Credential;
 import org.mapstruct.Mapper;
 import org.springframework.data.domain.Page;
 
-@Mapper(componentModel = "spring")
+@Mapper( componentModel = "spring" )
 public interface CredentialEntityMapper {
 
 	CredentialEntity map( Credential credential );

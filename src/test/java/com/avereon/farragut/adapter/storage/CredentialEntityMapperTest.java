@@ -2,6 +2,7 @@ package com.avereon.farragut.adapter.storage;
 
 import com.avereon.farragut.core.model.Credential;
 import com.avereon.farragut.port.inbound.AuthCommand;
+import com.avereon.farragut.util.IdUtil;
 import org.junit.jupiter.api.Test;
 
 import java.util.UUID;
@@ -14,9 +15,9 @@ public class CredentialEntityMapperTest {
 
 	@Test
 	void toEntity() {
-		UUID userId = UUID.randomUUID();
+		UUID userId = IdUtil.random();
 		Credential credential = new Credential();
-		credential.setId( AuthCommand.generateClientId( "johndoe" ) );
+		credential.setId( IdUtil.generate( "johndoe" ) );
 		credential.setSecret( "sample password hash string" );
 		credential.setUserId( userId );
 
@@ -31,9 +32,9 @@ public class CredentialEntityMapperTest {
 
 	@Test
 	void toCore() {
-		UUID userId = UUID.randomUUID();
+		UUID userId = IdUtil.random();
 		CredentialEntity entity = new CredentialEntity();
-		entity.setId( AuthCommand.generateClientId( "johndoe" ) );
+		entity.setId( IdUtil.generate( "johndoe" ) );
 		entity.setSecret( "sample password hash string" );
 		entity.setUserId( userId );
 

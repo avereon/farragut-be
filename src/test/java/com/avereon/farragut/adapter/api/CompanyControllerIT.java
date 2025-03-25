@@ -3,13 +3,14 @@ package com.avereon.farragut.adapter.api;
 import com.avereon.farragut.BaseIT;
 import com.avereon.farragut.adapter.storage.CompanyEntity;
 import com.avereon.farragut.adapter.storage.CompanyRepository;
+import com.avereon.farragut.util.IdUtil;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 
+import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.http.HttpStatus.OK;
@@ -28,8 +29,8 @@ public class CompanyControllerIT extends BaseIT {
 	@SuppressWarnings( "unchecked" )
 	void getCompaniesByPage() {
 		// given
-		companyRepository.save( new CompanyEntity().setId( UUID.randomUUID() ).setName( "Company 1" ) );
-		companyRepository.save( new CompanyEntity().setId( UUID.randomUUID() ).setName( "Company 2" ) );
+		companyRepository.save( new CompanyEntity().setId( IdUtil.random() ).setName( "Company 1" ) );
+		companyRepository.save( new CompanyEntity().setId( IdUtil.random() ).setName( "Company 2" ) );
 
 		// when
 		ResponseEntity<Object> result = restTemplate.getForEntity( CompanyController.COMPANY_QUERY, Object.class, 0, 10 );
@@ -43,17 +44,17 @@ public class CompanyControllerIT extends BaseIT {
 		assertThat( body ).containsEntry( "totalPages", 1 );
 		assertThat( body ).containsEntry( "totalCount", 2 );
 		assertThat( body ).containsKey( "values" );
-		assertThat( body.get( "values" ) ).asList().hasSize( 2 );
+		assertThat( (List<?>)body.get( "values" ) ).hasSize( 2 );
 	}
 
 	@Test
 	@SuppressWarnings( "unchecked" )
 	void getCompaniesBySmallPage() {
 		// given
-		companyRepository.save( new CompanyEntity().setId( UUID.randomUUID() ).setName( "Company 1" ) );
-		companyRepository.save( new CompanyEntity().setId( UUID.randomUUID() ).setName( "Company 2" ) );
-		companyRepository.save( new CompanyEntity().setId( UUID.randomUUID() ).setName( "Company 3" ) );
-		companyRepository.save( new CompanyEntity().setId( UUID.randomUUID() ).setName( "Company 4" ) );
+		companyRepository.save( new CompanyEntity().setId( IdUtil.random() ).setName( "Company 1" ) );
+		companyRepository.save( new CompanyEntity().setId( IdUtil.random() ).setName( "Company 2" ) );
+		companyRepository.save( new CompanyEntity().setId( IdUtil.random() ).setName( "Company 3" ) );
+		companyRepository.save( new CompanyEntity().setId( IdUtil.random() ).setName( "Company 4" ) );
 
 		// when
 		ResponseEntity<Object> result = restTemplate.getForEntity( CompanyController.COMPANY_QUERY, Object.class, 1, 2 );

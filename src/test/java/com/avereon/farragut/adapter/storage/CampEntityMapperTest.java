@@ -1,9 +1,8 @@
 package com.avereon.farragut.adapter.storage;
 
 import com.avereon.farragut.core.model.Camp;
+import com.avereon.farragut.util.IdUtil;
 import org.junit.jupiter.api.Test;
-
-import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -16,7 +15,7 @@ class CampEntityMapperTest {
 	void testToEntity() {
 		// given
 		Camp camp = new Camp();
-		camp.setId( UUID.randomUUID() );
+		camp.setId( IdUtil.random() );
 		camp.setName( "Bennion" );
 
 		// when
@@ -32,7 +31,7 @@ class CampEntityMapperTest {
 	void testToCore() {
 		// given
 		CampEntity campEntity = new CampEntity();
-		campEntity.setId( UUID.randomUUID() );
+		campEntity.setId( IdUtil.random() );
 		campEntity.setName( "Bennion" );
 
 		// when
@@ -43,4 +42,5 @@ class CampEntityMapperTest {
 		assertEquals( campEntity.getId(), camp.getId() );
 		assertEquals( campEntity.getName(), camp.getName() );
 	}
+
 }
