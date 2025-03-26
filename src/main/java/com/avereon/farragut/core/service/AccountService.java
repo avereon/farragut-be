@@ -24,17 +24,17 @@ public class AccountService implements AccountCommand, AccountQuery {
 
 	@Override
 	public Account create( Account account ) {
-		return null;
+		return accountStorage.save( account );
 	}
 
 	@Override
 	public Page<Account> findAll( Pageable pageable ) {
-		return null;
+		return accountStorage.findAll( pageable );
 	}
 
 	@Override
 	public Account find( UUID UUID ) {
-		return null;
+		return accountStorage.find( UUID );
 	}
 
 	public String createJwt( UUID accountId ) {
