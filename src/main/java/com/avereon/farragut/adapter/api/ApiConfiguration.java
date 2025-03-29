@@ -24,7 +24,7 @@ public class ApiConfiguration {
 	@Bean
 	public CorsConfigurationSource corsConfigurationSource() {
 		CorsConfiguration configuration = new CorsConfiguration();
-		configuration.setAllowedOrigins( List.of( "*" ) ); // Allow requests from this origin
+		configuration.setAllowedOrigins( List.of("https://farragut.avereon.com","http://localhost:3000") ); // Allow requests from this origin
 		configuration.setAllowedMethods( List.of( "GET", "POST", "PUT", "DELETE", "OPTIONS" ) ); // Allowed HTTP methods
 		configuration.setAllowedHeaders( List.of( "Authorization", "Content-Type" ) ); // Allowed headers
 		configuration.setAllowCredentials( true ); // Allow sending credentials (cookies, authorization headers)
