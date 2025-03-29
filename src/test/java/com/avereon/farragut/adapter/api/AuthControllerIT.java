@@ -54,7 +54,7 @@ public class AuthControllerIT extends BaseIT {
 		CredentialEntity credentialEntity = new CredentialEntity();
 		credentialEntity.setId( IdUtil.generate( USERNAME ) );
 		credentialEntity.setSecret( passwordEncoder.encode( PASSWORD ) );
-		credentialEntity.setUserId( accountEntity.getId() );
+		credentialEntity.setAccountId( accountEntity.getId() );
 		credentialRepo.save( credentialEntity );
 
 		String body = "";

@@ -20,9 +20,9 @@ public class Credential {
 	private String secret;
 
 	/**
-	 * The user id. This is the user associated with these credentials. A user may
-	 * have multiple sets of credentials.
+	 * The account id. This is the account associated with these credentials. An
+	 * account may have multiple sets of credentials.
 	 */
-	private UUID userId;
+	private UUID accountId;
 
 }

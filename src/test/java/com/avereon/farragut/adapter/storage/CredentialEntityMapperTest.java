@@ -1,7 +1,6 @@
 package com.avereon.farragut.adapter.storage;
 
 import com.avereon.farragut.core.model.Credential;
-import com.avereon.farragut.port.inbound.AuthCommand;
 import com.avereon.farragut.util.IdUtil;
 import org.junit.jupiter.api.Test;
 
@@ -19,7 +18,7 @@ public class CredentialEntityMapperTest {
 		Credential credential = new Credential();
 		credential.setId( IdUtil.generate( "johndoe" ) );
 		credential.setSecret( "sample password hash string" );
-		credential.setUserId( userId );
+		credential.setAccountId( userId );
 
 		// when
 		CredentialEntity entity = mapper.map( credential );
@@ -27,7 +26,7 @@ public class CredentialEntityMapperTest {
 		// then
 		assertThat( entity.getId() ).isEqualTo( credential.getId() );
 		assertThat( entity.getSecret() ).isEqualTo( credential.getSecret() );
-		assertThat( entity.getUserId() ).isEqualTo( credential.getUserId() );
+		assertThat( entity.getAccountId() ).isEqualTo( credential.getAccountId() );
 	}
 
 	@Test
@@ -36,7 +35,7 @@ public class CredentialEntityMapperTest {
 		CredentialEntity entity = new CredentialEntity();
 		entity.setId( IdUtil.generate( "johndoe" ) );
 		entity.setSecret( "sample password hash string" );
-		entity.setUserId( userId );
+		entity.setAccountId( userId );
 
 		// when
 		Credential credential = mapper.map( entity );
@@ -44,7 +43,7 @@ public class CredentialEntityMapperTest {
 		// then
 		assertThat( credential.getId() ).isEqualTo( entity.getId() );
 		assertThat( credential.getSecret() ).isEqualTo( entity.getSecret() );
-		assertThat( credential.getUserId() ).isEqualTo( entity.getUserId() );
+		assertThat( credential.getAccountId() ).isEqualTo( entity.getAccountId() );
 	}
 
 }
