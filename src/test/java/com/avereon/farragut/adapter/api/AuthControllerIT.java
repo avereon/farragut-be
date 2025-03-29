@@ -2,12 +2,12 @@ package com.avereon.farragut.adapter.api;
 
 import com.avereon.farragut.BaseIT;
 import com.avereon.farragut.adapter.storage.AccountEntity;
+import com.avereon.farragut.adapter.storage.AccountRepository;
 import com.avereon.farragut.adapter.storage.CredentialEntity;
 import com.avereon.farragut.adapter.storage.CredentialRepository;
-import com.avereon.farragut.adapter.storage.AccountRepository;
 import com.avereon.farragut.core.config.PasswordEncoder;
-import com.avereon.farragut.core.service.AuthCommandService;
 import com.avereon.farragut.core.service.AccountService;
+import com.avereon.farragut.core.service.AuthCommandService;
 import com.avereon.farragut.util.IdUtil;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -22,9 +22,9 @@ import static org.springframework.http.HttpStatus.OK;
 
 public class AuthControllerIT extends BaseIT {
 
-	private static final String USERNAME = "username";
+	private static final String USERNAME = "user@example.com";
 
-	private static final String PASSWORD = "password";
+	private static final String PASSWORD = "LU&cLGxwFzA*77D$";
 
 	@Autowired
 	private AuthCommandService authService;
