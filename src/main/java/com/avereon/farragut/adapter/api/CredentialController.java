@@ -7,6 +7,9 @@ import java.util.UUID;
 
 public class CredentialController implements CredentialApi {
 
+	public static final String CREDENTIAL_API_ROOT = "/credential";
+	public static final String CREDENTIAL_QUERY = CREDENTIAL_API_ROOT + "?page={page}&size={size}";
+
 	@Override
 	public ResponseEntity<Credential> getCredential( UUID id ) {
 		return null;
