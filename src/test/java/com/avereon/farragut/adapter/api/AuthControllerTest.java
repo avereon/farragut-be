@@ -11,11 +11,11 @@ public class AuthControllerTest {
 
 	@Test
 	void getParameters() {
-		AuthController controller = new AuthController();
+		AuthController controller = new AuthController( null );
 
-		MultiValueMap<String,String> parameters = controller.getParameters( "username=johnny&password=<PASSWORD>" );
+		MultiValueMap<String, String> parameters = controller.getParameters( "username=johnny&password=<PASSWORD>" );
 
-		assertThat( parameters ).containsEntry( "username", List.of( "johnny") );
+		assertThat( parameters ).containsEntry( "username", List.of( "johnny" ) );
 		assertThat( parameters ).containsEntry( "password", List.of( "<PASSWORD>" ) );
 	}
 

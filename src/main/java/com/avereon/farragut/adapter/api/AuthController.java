@@ -19,8 +19,7 @@ public class AuthController implements AuthApi {
 
 	public static final String AUTH_API_ROOT = API_ROOT + "/auth";
 
-	@Autowired
-	private AuthCommand authService;
+	private final AuthCommand authService;
 
 	@Override
 	public ResponseEntity<String> login( String body ) {
