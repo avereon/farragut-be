@@ -9,6 +9,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Base64;
 import java.util.Map;
 import java.util.UUID;
 
@@ -37,13 +40,23 @@ public class AuthCommandService implements AuthCommand {
 		if( credential == null ) throw new IllegalArgumentException();
 
 		// Verify the password
+		log.info( "password hash={}", generateSHA512( password ) );
 		if( !passwordEncoder.matches( password, credential.getSecret() ) ) throw new IllegalArgumentException();
-		log.info( "password matched!" );
 
 		// Generate a new JWT for the user
 		String jwt = accountService.createJwt( credential.getAccountId() );
 		log.info( "jwt={}", jwt );
 		return jwt;
+	}
+
+	public static String generateSHA512( String input ) {
+		try {
+			MessageDigest digest = MessageDigest.getInstance( "SHA-512" );
+			byte[] buffer = digest.digest( input.getBytes() );
+			return Base64.getEncoder().encodeToString( buffer );
+		} catch( NoSuchAlgorithmException e ) {
+			throw new RuntimeException( e );
+		}
 	}
 
 }
