@@ -9,9 +9,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.HexFormat;
 import java.util.Map;
 import java.util.UUID;
 
@@ -53,7 +53,7 @@ public class AuthCommandService implements AuthCommand {
 		try {
 			MessageDigest digest = MessageDigest.getInstance( "SHA-512" );
 			byte[] buffer = digest.digest( input.getBytes() );
-			return new String( buffer, StandardCharsets.UTF_8 );
+			return HexFormat.of().formatHex( buffer );
 		} catch( NoSuchAlgorithmException e ) {
 			throw new RuntimeException( e );
 		}
