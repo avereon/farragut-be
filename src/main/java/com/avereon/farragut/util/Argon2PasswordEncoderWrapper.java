@@ -1,5 +1,6 @@
-package com.avereon.farragut.core.config;
+package com.avereon.farragut.util;
 
+import com.avereon.farragut.core.config.PasswordEncoder;
 import org.springframework.security.crypto.argon2.Argon2PasswordEncoder;
 
 public class Argon2PasswordEncoderWrapper implements PasswordEncoder {
