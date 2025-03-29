@@ -36,27 +36,13 @@ public class AuthCommandService implements AuthCommand {
 		// Get the password hash from the database
 		UUID credentialId = IdUtil.generate( username );
 		Credential credential = credentialStorage.find( credentialId );
-		log.info( "credentialId={} found={}", credentialId, credential != null );
 		if( credential == null ) throw new IllegalArgumentException();
 
 		// Verify the password
-		log.info( "password hash={}", generateSHA512( password ) );
 		if( !passwordEncoder.matches( password, credential.getSecret() ) ) throw new IllegalArgumentException();
 
 		// Generate a new JWT for the user
-		String jwt = accountService.createJwt( credential.getAccountId() );
-		log.info( "jwt={}", jwt );
-		return jwt;
-	}
-
-	public static String generateSHA512( String input ) {
-		try {
-			MessageDigest digest = MessageDigest.getInstance( "SHA-512" );
-			byte[] buffer = digest.digest( input.getBytes() );
-			return HexFormat.of().formatHex( buffer );
-		} catch( NoSuchAlgorithmException e ) {
-			throw new RuntimeException( e );
-		}
+		return accountService.createJwt( credential.getAccountId() );
 	}
 
 }
