@@ -35,6 +35,8 @@ public class ApiConfiguration {
 
 	@Bean
 	SecurityFilterChain securityFilterChain( HttpSecurity http ) throws Exception {
+		http.cors( cors -> cors.configurationSource( corsConfigurationSource()));
+
 		// Do not use CSRF on the auth endpoints
 		http.csrf( csrf -> csrf.ignoringRequestMatchers( AuthController.AUTH_API_ROOT + "/**" ) );
 

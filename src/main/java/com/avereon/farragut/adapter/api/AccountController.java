@@ -11,4 +11,5 @@ public class AccountController implements AccountApi {
 	public ResponseEntity<Account> getAccount( UUID id ) {
 		return null;
 	}
+
 }
