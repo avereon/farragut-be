@@ -38,9 +38,12 @@ public class AuthCommandService implements AuthCommand {
 
 		// Verify the password
 		if( !passwordEncoder.matches( password, credential.getSecret() ) ) throw new IllegalArgumentException();
+		log.info( "password matched!" );
 
 		// Generate a new JWT for the user
-		return accountService.createJwt( credential.getAccountId() );
+		String jwt = accountService.createJwt( credential.getAccountId() );
+		log.info( "jwt={}", jwt );
+		return jwt;
 	}
 
 }
