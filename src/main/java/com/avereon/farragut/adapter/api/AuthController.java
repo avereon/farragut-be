@@ -2,13 +2,14 @@ package com.avereon.farragut.adapter.api;
 
 import com.avereon.farragut.port.inbound.AuthCommand;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
 import static com.avereon.farragut.adapter.api.ApiConfiguration.API_ROOT;
@@ -32,6 +33,8 @@ public class AuthController implements AuthApi {
 		if( password == null || password.isBlank() ) return unauthorized;
 
 		try {
+			username = URLDecoder.decode( username, StandardCharsets.UTF_8 );
+			password = URLDecoder.decode( password, StandardCharsets.UTF_8 );
 			String jwt = authService.authenticate( Map.of( "username", username, "password", password ) );
 			return ResponseEntity.ok( jwt );
 		} catch( IllegalArgumentException exception ) {

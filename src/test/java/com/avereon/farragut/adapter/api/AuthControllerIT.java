@@ -13,8 +13,14 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+import java.util.List;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -24,7 +30,7 @@ public class AuthControllerIT extends BaseIT {
 
 	private static final String USERNAME = "user@example.com";
 
-	private static final String PASSWORD = "LU&cLGxwFzA*77D$";
+	private static final String PASSWORD = "LU#cLG&wFzA*77D$";
 
 	@Autowired
 	private AuthCommandService authService;
@@ -58,12 +64,17 @@ public class AuthControllerIT extends BaseIT {
 		credentialRepo.save( credentialEntity );
 
 		String body = "";
-		if( username != null ) body += "username=" + username;
-		if( password != null ) body += "&password=" + password;
+		if( username != null ) body += "username=" + URLEncoder.encode( username, StandardCharsets.UTF_8 );
+		if( password != null ) body += "&password=" + URLEncoder.encode( password, StandardCharsets.UTF_8 );
+		System.out.println( "body=" + body );
+
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType( MediaType.APPLICATION_OCTET_STREAM );
+		headers.setAccept( List.of( MediaType.APPLICATION_OCTET_STREAM ) );
 
 		// when
-		var result = restTemplate.postForEntity( AuthController.AUTH_API_ROOT + "/login", body, String.class );
-		System.out.println( "result=" + result );
+		HttpEntity<String> entity = new HttpEntity<>( body, headers );
+		var result = restTemplate.postForEntity( AuthController.AUTH_API_ROOT + "/login", entity, String.class );
 
 		// then
 		assertThat( result.getStatusCode() ).isEqualTo( expected );
