@@ -6,12 +6,15 @@ import com.avereon.farragut.port.inbound.AuthCommand;
 import com.avereon.farragut.port.outbound.CredentialStorage;
 import com.avereon.farragut.util.IdUtil;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class AuthCommandService implements AuthCommand {
 
 	private final PasswordEncoder passwordEncoder;
@@ -28,7 +31,9 @@ public class AuthCommandService implements AuthCommand {
 		if( password == null || password.isBlank() ) throw new IllegalArgumentException();
 
 		// Get the password hash from the database
-		Credential credential = credentialStorage.find( IdUtil.generate( username ) );
+		UUID credentialId = IdUtil.generate( username );
+		Credential credential = credentialStorage.find( credentialId );
+		log.info( "credentialId={} found={}", credentialId, credential != null );
 		if( credential == null ) throw new IllegalArgumentException();
 
 		// Verify the password
