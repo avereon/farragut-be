@@ -9,9 +9,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.util.HexFormat;
 import java.util.Map;
 import java.util.UUID;
 
@@ -24,7 +21,7 @@ public class AuthCommandService implements AuthCommand {
 
 	private final CredentialStorage credentialStorage;
 
-	private final AccountService accountService;
+	private final AccountCommandService accountCommandService;
 
 	@Override
 	public String authenticate( Map<String, String> credentials ) {
@@ -42,7 +39,7 @@ public class AuthCommandService implements AuthCommand {
 		if( !passwordEncoder.matches( password, credential.getSecret() ) ) throw new IllegalArgumentException();
 
 		// Generate a new JWT for the user
-		return accountService.createJwt( credential.getAccountId() );
+		return accountCommandService.createJwt( credential.getAccountId() );
 	}
 
 }

@@ -8,8 +8,8 @@ import java.util.UUID;
 
 public interface CampQuery {
 
-	Page<Camp> findAll( Pageable pageable );
-
 	Camp find( UUID UUID );
+
+	Page<Camp> findAll( Pageable pageable );
 
 }

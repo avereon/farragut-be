@@ -8,8 +8,8 @@ import java.util.UUID;
 
 public interface AccountQuery {
 
-	Page<Account> findAll( Pageable pageable );
-
 	Account find( UUID UUID );
+
+	Page<Account> findAll( Pageable pageable );
 
 }

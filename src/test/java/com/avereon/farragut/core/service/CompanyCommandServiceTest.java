@@ -33,7 +33,7 @@ public class CompanyCommandServiceTest {
 
 		// when
 		when( companyStorage.save( any( Company.class ) ) ).thenAnswer( i -> i.getArguments()[ 0 ] );
-		Company result = companyCommandService.createCompany( copy );
+		Company result = companyCommandService.create( copy );
 
 		// then
 		assertThat( result ).isNotNull();

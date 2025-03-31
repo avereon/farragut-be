@@ -4,11 +4,8 @@ import com.avereon.farragut.adapter.web.jwt.JwtTokenProvider;
 import com.avereon.farragut.core.model.Account;
 import com.avereon.farragut.core.model.Role;
 import com.avereon.farragut.port.inbound.AccountCommand;
-import com.avereon.farragut.port.inbound.AccountQuery;
 import com.avereon.farragut.port.outbound.AccountStorage;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,7 +13,7 @@ import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
-public class AccountService implements AccountCommand, AccountQuery {
+public class AccountCommandService implements AccountCommand {
 
 	private final AccountStorage accountStorage;
 
@@ -28,19 +25,26 @@ public class AccountService implements AccountCommand, AccountQuery {
 	}
 
 	@Override
-	public Page<Account> findAll( Pageable pageable ) {
-		return accountStorage.findAll( pageable );
+	public Account update( Account account ) {
+		return null;
 	}
 
 	@Override
-	public Account find( UUID UUID ) {
-		return accountStorage.find( UUID );
+	public Account update( UUID id, Account account ) {
+		return null;
 	}
 
+	@Override
+	public Account delete( UUID id ) {
+		return null;
+	}
+
+	@Override
 	public String createJwt( UUID accountId ) {
 		return createJwt( accountStorage.find( accountId ) );
 	}
 
+	@Override
 	public String createJwt( Account account ) {
 		// Lookup the account permissions
 		List<String> permissions = List.of( Role.CLIENT );

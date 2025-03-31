@@ -14,7 +14,7 @@ public class CompanyCommandService implements CompanyCommand {
 	private final CompanyStorage storage;
 
 	@Override
-	public Company createCompany( Company company ) {
+	public Company create( Company company ) {
 		company.setId( IdUtil.random() );
 		return storage.save( company );
 	}

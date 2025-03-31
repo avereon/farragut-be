@@ -3,11 +3,11 @@ package com.avereon.farragut.util;
 import com.avereon.farragut.core.config.PasswordEncoder;
 import org.springframework.security.crypto.argon2.Argon2PasswordEncoder;
 
-public class Argon2PasswordEncoderWrapper implements PasswordEncoder {
+public class Argon2Encoder implements PasswordEncoder {
 
 	private final Argon2PasswordEncoder argon2PasswordEncoder;
 
-	public Argon2PasswordEncoderWrapper() {
+	public Argon2Encoder() {
 		this.argon2PasswordEncoder = new Argon2PasswordEncoder( 16, 32, 1, 60000, 10 );
 	}
 

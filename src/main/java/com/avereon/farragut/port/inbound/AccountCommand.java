@@ -8,7 +8,13 @@ public interface AccountCommand {
 
 	Account create( Account account );
 
-	String createJwt( UUID accountId );
+	Account update( Account account );
+
+	Account update( UUID id, Account account );
+
+	Account delete( UUID id );
+
+	String createJwt( UUID id );
 
 	String createJwt( Account account );
 

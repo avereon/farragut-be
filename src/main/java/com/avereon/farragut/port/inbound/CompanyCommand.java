@@ -4,6 +4,6 @@ import com.avereon.farragut.core.model.Company;
 
 public interface CompanyCommand {
 
-	Company createCompany( Company company );
+	Company create( Company company );
 
 }

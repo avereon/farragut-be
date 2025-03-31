@@ -6,7 +6,7 @@ import com.avereon.farragut.adapter.storage.AccountRepository;
 import com.avereon.farragut.adapter.storage.CredentialEntity;
 import com.avereon.farragut.adapter.storage.CredentialRepository;
 import com.avereon.farragut.core.config.PasswordEncoder;
-import com.avereon.farragut.core.service.AccountService;
+import com.avereon.farragut.core.service.AccountCommandService;
 import com.avereon.farragut.core.service.AuthCommandService;
 import com.avereon.farragut.util.IdUtil;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -36,7 +36,7 @@ public class AuthControllerIT extends BaseIT {
 	private AuthCommandService authService;
 
 	@Autowired
-	private AccountService accountService;
+	private AccountCommandService accountCommandService;
 
 	@Autowired
 	private AccountRepository userRepo;
