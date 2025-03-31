@@ -8,10 +8,21 @@ import java.util.UUID;
 public class AccountController implements AccountApi {
 
 	public static final String ACCOUNT_API_ROOT = "/account";
+
 	public static final String ACCOUNT_QUERY = ACCOUNT_API_ROOT + "?page={page}&size={size}";
 
 	@Override
 	public ResponseEntity<Account> getAccount( UUID id ) {
+		return null;
+	}
+
+	@Override
+	public ResponseEntity<Account> createAccount( Account account ) {
+		return null;
+	}
+
+	@Override
+	public ResponseEntity<Account> updateAccount( UUID id, Account account ) {
 		return null;
 	}
 
