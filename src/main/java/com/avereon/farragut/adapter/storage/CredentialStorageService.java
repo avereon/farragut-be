@@ -24,8 +24,7 @@ public class CredentialStorageService implements CredentialStorage {
 
 	@Override
 	public Page<Credential> findAll( Pageable pageable ) {
-		//return mapper.mapPage( repo.findAll( pageable ) );
-		return null;
+		return mapper.mapPage( repo.findAll( pageable ) );
 	}
 
 	@Override

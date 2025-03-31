@@ -1,9 +1,10 @@
 package com.avereon.farragut.core.service;
 
 import com.avereon.farragut.BaseIT;
-import com.avereon.farragut.adapter.storage.AccountRepository;
+import com.avereon.farragut.adapter.storage.CredentialRepository;
 import com.avereon.farragut.core.model.Account;
-import com.avereon.farragut.port.outbound.AccountStorage;
+import com.avereon.farragut.core.model.Credential;
+import com.avereon.farragut.port.outbound.CredentialStorage;
 import com.avereon.farragut.util.IdUtil;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,16 +14,16 @@ import org.springframework.data.domain.Pageable;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assumptions.assumeThat;
 
-public class AccountQueryServiceIT extends BaseIT {
+public class CredentialQueryServiceIT extends BaseIT {
 
 	@Autowired
-	private AccountQueryService service;
+	private CredentialQueryService service;
 
 	@Autowired
-	private AccountStorage storage;
+	private CredentialStorage storage;
 
 	@Autowired
-	private AccountRepository repo;
+	private CredentialRepository repo;
 
 	@Test
 	void find() {
@@ -30,17 +31,19 @@ public class AccountQueryServiceIT extends BaseIT {
 		repo.deleteAll();
 		assumeThat( repo.count() ).isZero();
 
-		Account account = new Account();
+		Credential account = new Credential();
 		account.setId( IdUtil.random() );
-		account.setName( "John Doe" );
+		account.setSecret( "secret" );
+		account.setAccountId( IdUtil.random() );
 		storage.save( account );
 
 		// when
-		Account found = service.find( account.getId() );
+		Credential found = service.find( account.getId() );
 
 		// then
 		assertThat( found ).isNotNull();
 		assertThat( found.getId() ).isEqualTo( account.getId() );
+		assertThat( found.getSecret() ).isEqualTo( account.getSecret() );
 	}
 
 	@Test
@@ -49,20 +52,20 @@ public class AccountQueryServiceIT extends BaseIT {
 		repo.deleteAll();
 		assumeThat( repo.count() ).isZero();
 
-		Account account1 = new Account();
-		account1.setId( IdUtil.random() );
-		account1.setName( "John Doe" );
-		storage.save( account1 );
+		Credential credential1 = new Credential();
+		credential1.setId( IdUtil.random() );
+		credential1.setSecret( "John Doe" );
+		storage.save( credential1 );
 
-		Account account2 = new Account();
-		account2.setId( IdUtil.random() );
-		account2.setName( "Jane Doe" );
-		storage.save( account2 );
+		Credential credential2 = new Credential();
+		credential2.setId( IdUtil.random() );
+		credential2.setSecret( "Jane Doe" );
+		storage.save( credential2 );
 
-		Account account3 = new Account();
-		account3.setId( IdUtil.random() );
-		account3.setName( "Jim Doe" );
-		storage.save( account3 );
+		Credential credential3 = new Credential();
+		credential3.setId( IdUtil.random() );
+		credential3.setSecret( "Jim Doe" );
+		storage.save( credential3 );
 
 		Pageable pageable = PageRequest.of( 0, 10 );
 

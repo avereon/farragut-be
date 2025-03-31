@@ -23,10 +23,10 @@ public class AccountCommandServiceIT extends BaseIT {
 	private AccountCommandService service;
 
 	@Autowired
-	private AccountStorage accountStorage;
+	private AccountStorage storage;
 
 	@Autowired
-	private AccountRepository accountRepo;
+	private AccountRepository repo;
 
 	@Autowired
 	private JwtTokenProvider tokenProvider;
@@ -34,8 +34,8 @@ public class AccountCommandServiceIT extends BaseIT {
 	@Test
 	void create() {
 		// given
-		accountRepo.deleteAll();
-		assumeThat( accountRepo.count() ).isZero();
+		repo.deleteAll();
+		assumeThat( repo.count() ).isZero();
 
 		Account account = new Account();
 		account.setId( IdUtil.random() );
@@ -45,7 +45,7 @@ public class AccountCommandServiceIT extends BaseIT {
 		service.create( account );
 
 		// then
-		Account found = accountStorage.find( account.getId() );
+		Account found = storage.find( account.getId() );
 		assertThat( found.getId() ).isNotNull();
 		assertThat( found.getName() ).isEqualTo( account.getName() );
 	}
