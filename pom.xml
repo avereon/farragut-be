@@ -22,7 +22,7 @@
 		<lombok.version>1.18.38</lombok.version>
 		<mariadb.client.version>3.5.3</mariadb.client.version>
 		<org.mapstruct.version>1.6.3</org.mapstruct.version>
-		<spring.security.crypto.version>6.4.4</spring.security.crypto.version>
+		<spring.security.crypto.version>6.5.0</spring.security.crypto.version>
 	</properties>
 
 	<dependencies>
