@@ -20,7 +20,7 @@
 		<bouncy.castle.version>1.81</bouncy.castle.version>
 		<jjwt.version>0.12.6</jjwt.version>
 		<lombok.version>1.18.38</lombok.version>
-		<mariadb.client.version>3.5.4</mariadb.client.version>
+		<mariadb.client.version>3.5.5</mariadb.client.version>
 		<org.mapstruct.version>1.6.3</org.mapstruct.version>
 		<spring.security.crypto.version>6.5.2</spring.security.crypto.version>
 	</properties>
